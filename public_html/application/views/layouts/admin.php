@@ -14,6 +14,7 @@
         <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
         <script src="/public/scripts/app.js"></script>
         <script src="/public/scripts/main.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
     </head>
     <body class="fixed-nav sticky-footer bg-dark">
         <?php if ($this->route['action'] != 'login'): ?>
