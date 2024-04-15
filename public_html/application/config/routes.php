@@ -22,10 +22,16 @@ return [
         'controller' => 'cart',
         'action' => 'index'
     ],
+
     'cart/add/{id:\d+}' => [
       'controller' => 'cart',
       'action' => 'add'
     ],
+    'cart/promo' => [
+        'controller' => 'cart',
+        'action' => 'promo'
+    ],
+
     'user/add' => [
       'controller' => 'user',
       'action' => 'add'

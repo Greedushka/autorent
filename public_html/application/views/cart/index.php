@@ -51,7 +51,7 @@
                             -
                         </button>
                     </span>
-                    <input type="text" value="1" class="count-days form-control" aria-label="readonly input example" readonly>
+                    <input type="text" value="1" id="counter" class="count-days form-control" aria-label="readonly input example" readonly>
                     <span class="input-group-btn">
                         <button class="btn btn-dark right-btn" type="submit">
                             +
@@ -64,21 +64,49 @@
                 <input type="text" placeholder="Ваша фамилия" name="surname" class="form-control" aria-label="default input example">
                 <input type="text" placeholder="Номер телефона" name="phone" class="form-control" aria-label="default input example">
                 <input type="text" placeholder="Почта" name="email" class="form-control" aria-label="default input example">
-                <input type="text" placeholder="Промокод" class="form-control" aria-label="default input example">
+
+                <div style="display: flex;"><div class="personalSale">10</div>%</div>
+
+                <div style="display: flex;" id="promoBlock">
+                    <input type="text" name="promo" placeholder="Промокод" id="promo" class="form-control" aria-label="default input example">
+                    <a class="btn btn-primary" onclick="promo();">Применить промокод</a>
+                </div>
+                <div id="promoText">
+                </div>
+
                 <h1 style="display: flex; justify-content: center; margin-top: 5%;"> <span class="badge badge-dark" style="display: flex; align-items: center; justify-content: center"><div class="price"><?php echo  array_sum(array_map(function($item) { return $item['price']; }, $cart ));?></div><sub>₽</sub></span> </h1>
                 <button class="btn btn-success" type="submit">Оформить заказ</button>
             </form>
 
             <script>
-                let input = document.querySelector('.count-days');
-                let total_price = document.querySelector('.price');
-                let final_price = total_price.innerHTML;
-                let counter = 1;
-                let submitOrder = document.getElementById('submitOrder');
+                var input = document.querySelector('.count-days');
+                var total_price = document.querySelector('.price');
+                var final_price = total_price.innerHTML;
+
+                var personalSale = document.querySelector('.personalSale');
+                var counter = document.getElementById('counter').value;
+                var submitOrder = document.getElementById('submitOrder');
+
+                function promo() {
+
+
+                    const formDataPromo = new FormData();
+                    formDataPromo.append('promo', document.getElementById('promo').value);
+                    const xhrPromo = new XMLHttpRequest();
+                    xhrPromo.open('POST', '/cart/promo', true);
+                    //xhrPromo.responseType = 'json';
+                    xhrPromo.onload = function() {
+                        if (xhrPromo.responseText != 0) {
+                            total_price.innerHTML = final_price * document.getElementById('counter').value * (1 - xhrPromo.responseText / 100);
+                            document.getElementById('promoBlock').style.display = 'none';
+                            document.getElementById('promoText').textContent = 'Скидка в размере ' + xhrPromo.responseText + '% по промокоду';
+                        }
+                    }
+                    xhrPromo.send(formDataPromo);
+                }
 
                 submitOrder.onsubmit = (e) => {
                     e.preventDefault();
-                    console.log('clicked')
                     const car = document.querySelector('.car-subtitle').textContent;
                     const car_img = document.querySelector('.card-img').src;
                     const user_id = 1;
@@ -90,8 +118,6 @@
                     formData.append('user_id', user_id);
                     formData.append('price', price);
                     formData.append('product_id', product_id)
-
-                    console.log(formData.get('car'))
 
                     const xhr = new XMLHttpRequest();
                     xhr.open('POST', '/orders/add', true)
