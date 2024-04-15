@@ -31,9 +31,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin/posts">
+                            <a class="nav-link" href="/admin/cars">
                             <i class="fa fa-fw fa-list"></i>
                             <span class="nav-link-text">Машины</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/promo">
+                                <i class="fa fa-fw fa-list"></i>
+                                <span class="nav-link-text">Промокоды</span>
                             </a>
                         </li>
                         <li class="nav-item">

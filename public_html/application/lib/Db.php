@@ -25,7 +25,7 @@ class Db {
         try {
             $stmt->execute();
         } catch (PDOException $exception) {
-            echo 123;
+            exit($exception);
         }
 
         return $stmt;

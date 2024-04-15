@@ -52,10 +52,11 @@ class Admin extends Model{
             'horse_power' => $post['horse_power'],
             'fuel_type' => $post['fuel_type'],
             'price' => $post['price'],
+            'img' => $post['img'],
             'auto_type' => $post['auto_type'],
             'color' => $post['color'],
         ];
-        $this->db->query('INSERT INTO car VALUES (DEFAULT, :brand, :model, :production_date, :mileage, :overclocking, :gas_tank, :kpp, :horse_power, :fuel_type, :price, NULL, :auto_type, :color)', $params);
+        $this->db->query('INSERT INTO car VALUES (DEFAULT, :brand, :model, :production_date, :mileage, :overclocking, :gas_tank, :kpp, :horse_power, :fuel_type, :price, :img, :auto_type, :color)', $params);
         return $this->db->lastInsertId();
     }
 //    public function postUploadImage($path, $id) {
@@ -69,6 +70,7 @@ class Admin extends Model{
         $params = [
             'id' => $id
         ];
+
         return $this->db->column('SELECT id FROM posts WHERE id = :id', $params);
     }
     public function postDelete($id) {
@@ -87,4 +89,53 @@ class Admin extends Model{
         return $this->db->row('SELECT * FROM car WHERE id = :id', $params);
     }
 
+    public function getCars(): array
+    {
+        return $this->db->row('SELECT * FROM car;');
     }
+
+    public function getCar(int $id): array
+    {
+        return $this->db->row("SELECT * FROM car WHERE id = {$id};");
+    }
+
+    public function editCar(int $id, array $data): void
+    {
+        $sql = "UPDATE `car` SET `model` = '{$data['model']}', 
+                 `brand` = '{$data['brand']}', 
+                 `production_date` = '{$data['production_date']}', 
+                 `mileage` = '{$data['mileage']}', 
+                 `overclocking` = '{$data['overclocking']}', 
+                 `gas_tank` = '{$data['gas_tank']}', 
+                 `kpp` = '{$data['kpp']}', 
+                 `horse_power` = '{$data['horse_power']}', 
+                 `fuel_type` = '{$data['fuel_type']}', 
+                 `price` = '{$data['price']}', 
+                 `img` = '{$data['img']}', 
+                 `auto_type` = '{$data['auto_type']}', 
+                 `color` = '{$data['color']}' 
+             WHERE `car`.`id` = {$id}";
+
+        $this->db->query($sql);
+    }
+
+    public function getPromos(): array
+    {
+        return $this->db->row('SELECT * FROM promo;');
+    }
+
+    public function addPromo(array $data): void
+    {
+        $this->db->query("INSERT INTO promo (name, sale) VALUES ('{$data['name']}', '{$data['sale']}')");
+    }
+
+    public function delPromo(int $id): void
+    {
+        $this->db->query("DELETE FROM promo WHERE id = {$id}");
+    }
+
+    public function delCar(int $id): void
+    {
+        $this->db->query("DELETE FROM car WHERE id = {$id}");
+    }
+}

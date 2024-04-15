@@ -67,7 +67,31 @@ return [
     'admin/cars' =>[
         'controller' => 'admin',
         'action' => 'cars'
-    ]
+    ],
+    'admin/car/{id:\d+}' =>[
+        'controller' => 'admin',
+        'action' => 'car'
+    ],
+    'admin/car/{id:\d+}/save' =>[
+        'controller' => 'admin',
+        'action' => 'carSave'
+    ],
+    'admin/car/{id:\d+}/delete' =>[
+        'controller' => 'admin',
+        'action' => 'carDelete'
+    ],
 
+    'admin/promo' =>[
+        'controller' => 'admin',
+        'action' => 'promo'
+    ],
+    'admin/promo/add' =>[
+        'controller' => 'admin',
+        'action' => 'promoAdd'
+    ],
+    'admin/promo/{id:\d+}/delete' =>[
+        'controller' => 'admin',
+        'action' => 'promoDelete'
+    ],
 
 ];

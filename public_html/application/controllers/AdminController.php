@@ -26,7 +26,7 @@ class AdminController extends Controller {
                 $this->view->message('error', $this->model->error);
             }
             $_SESSION['admin'] = true;
-            $this->view->location('admin/add');
+            $this->view->redirect('admin/add');
         }
 
         $this->view->render('Вход');
@@ -34,15 +34,17 @@ class AdminController extends Controller {
     public function addAction(): void
     {
         if (!empty($_POST)) {
-//            if (!$this->model->postValidate($_POST, 'add')) {
-//                $this->view->message('error', $this->model->error);
-//            }
+            if (!empty($_FILES['img'])) {
+                $fileName = rand() . '.' . pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
+                move_uploaded_file($_FILES['img']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/public/imgs/' . $fileName);
+                $_POST['img'] = $fileName;
+            } else {
+                $_POST['img'] = NULL;
+            }
+
             $id = $this->model->postAdd($_POST);
-//            if(!id) {
-//                $this->view->message('error', 'id нет');
-//            }
-//            $this->model->postUploadImage($_FILES['img']['tmp_name'], $id);
-            $this->view->message('success', 'id: '.$id);
+            //$this->view->message('success', 'id: '.$id);
+            $this->view->redirect('admin/cars');
         }
         $this->view->render('Добавить машину');
     }
@@ -68,7 +70,58 @@ class AdminController extends Controller {
         $this->view->redirect('admin/login');
     }
     public function carsAction() {
-        $this->view->render('Машины');
+        $cars = $this->model->getCars();
+        $this->view->render('Машины', ['cars' => $cars]);
     }
 
+    public function carAction(): void
+    {
+        $car = $this->model->getCar($this->route['id']);
+        $this->view->render('Машина', ['car' => $car[0]]);
+    }
+
+    public function carSaveAction(): void
+    {
+        if (!empty($_FILES['img'])) {
+            $fileName = rand() . '.' . pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
+            move_uploaded_file($_FILES['img']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/public/imgs/' . $fileName);
+            $_POST['img'] = $fileName;
+
+            $car = $this->model->getCar($this->route['id']);
+            unlink($_SERVER['DOCUMENT_ROOT'] . '/public/imgs/' . $car[0]['img']);
+        } else {
+            $car = $this->model->getCar($this->route['id']);
+            $_POST['img'] = $car[0]['img'];
+        }
+
+        $this->model->editCar($this->route['id'], $_POST);
+        $this->view->redirect("admin/car/{$this->route['id']}");
+    }
+
+    public function carDeleteAction(): void
+    {
+        $car = $this->model->getCar($this->route['id']);
+        unlink($_SERVER['DOCUMENT_ROOT'] . '/public/imgs/' . $car[0]['img']);
+
+        $this->model->delCar($this->route['id']);
+        $this->view->redirect('admin/cars');
+    }
+
+    public function promoAction() : void
+    {
+        $promos = $this->model->getPromos();
+        $this->view->render('Промокоды',  ['promos' => $promos]);
+    }
+
+    public function promoAddAction(): void
+    {
+        $this->model->addPromo($_POST);
+        $this->view->redirect('admin/promo');
+    }
+
+    public function promoDeleteAction(): void
+    {
+        $this->model->delPromo($this->route['id']);
+        $this->view->redirect('admin/promo');
+    }
 }
