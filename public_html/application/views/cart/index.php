@@ -12,20 +12,32 @@
 </header>
 <div class="container">
     <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="mx-auto" style="display: flex; justify-content: center; align-items: center">
             <?php if (empty($cart)): ?>
                 <p>Корзина пуста</p>
             <?php else: ?>
-                <?php foreach ($cart as $val): ?>
-                    <div class="post-preview">
-                        <a href="/car/<?php echo $val['id']; ?>">
-                            <img class="card-img" src="/public/imgs/<?php echo htmlspecialchars($val['car_img'], ENT_QUOTES); ?>">
-                            <h5 class="car-subtitle"><?php echo htmlspecialchars($val['car'], ENT_QUOTES); ?></h5>
+            <div class="card-deck" style="margin-left: 15px !important; margin-right: 15px !important; width: 800px">
+                <?php foreach ($cart as $val) { ?>
+                        <a href="/car/<?=$val['id']?>" style="width: 800px">
+                            <div class="card mb-3" style="width: 800px">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="/public/imgs/<?= $val['car_img'] ?>" alt="" width="250" height="185">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title</h5>
+                                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </a>
-                        <p class="post-meta total-price">Цена: <?php echo $val['price']; ?> <i>Руб./сутки</i></p>
-                    </div>
-                    <hr>
-                <?php endforeach; ?>
+
+
+                <?php } ?>
+            </div>
                 <div class="clearfix">
                     <!--                    --><?php //echo $pagination; ?>
                 </div>

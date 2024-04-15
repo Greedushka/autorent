@@ -5,6 +5,7 @@
  *  @return в случае успеха обновятся данные корзины на странице
  */
 function addToCart(itemId){
+    alert('В корзине')
     $.ajax({
         type: 'POST',
         async: false,

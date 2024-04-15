@@ -13,10 +13,10 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-            <p><?= htmlspecialchars($data['horse_power'], ENT_QUOTES); ?></p>
-            <p class="car-price"><?= htmlspecialchars($data['price'], ENT_QUOTES); ?></p>
-        </div>
-        <div class="col-lg-8 col-md-10 mx-auto">
+            <p>Мощность: <?= htmlspecialchars($data['horse_power'], ENT_QUOTES); ?><sub>/л.с</sub></p>
+            <p class="car-price">Цена за час: <?= htmlspecialchars($data['price'], ENT_QUOTES); ?><sub>₽/час</sub></p>
+            <p class="car-price">Категория: <?= $data['auto_type'] ? htmlspecialchars($data['auto_type']) : 'машина' ?></p>
+            <p class="car-price">Цвет: <?= $data['color'] ? htmlspecialchars($data['color']) : 'чёрный' ?></p>
             <div class="btn submit">
                 <button type="button" class="btn btn-primary placeAnOrder" onclick="addToCart(<?= $data['id'] ?>)">Добавить в корзину</button>
             </div>

@@ -21,21 +21,30 @@ $cars = $db->row('SELECT * FROM car');
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto d-flex justify-content-center">
-            <div class="card-deck">
-        <?php foreach ($cars as $key => $car): ?>
-            <div class="card">
-                <div class="card-head"><?=  $car['brand']." ".$car['model'] ?></div>
-                    <img src="/public/imgs/20180120195009S__18350116-1000x800.jpg" alt="" class="card-img-center">
-                <div class="card-footer">
-                    <p>Пробег: <?= $car['mileage'] ?></p>
-                    <p>Разгон: <?= $car['overclocking'] ?></p>
-                    <p>КПП: <?= $car['kpp'] ?></p>
-                    <p>Топливо: <?= $car['fuel_type'] ?></p>
-                    <p>Л.С: <?= $car['horse_power'] ?></p>
+                <div class="card" style="width: 40rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
-            </div>
+                <div class="card" style="width: 40rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+                <div class="card" style=" width: 40rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
         </div>
     </div>
 </div>
