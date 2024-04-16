@@ -49,6 +49,15 @@
                             <?= isset($_SESSION['user']) ? '/profile' : '/login' ?>
                             "><?= isset($_SESSION['user']) ? 'Профиль' : 'Войти' ?></a>
                         </li>
+                        <?php
+                            if (isset($_SESSION['user'])) {
+                                ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/logout">Выйти</a>
+                                </li>
+                        <?php
+                            }
+                        ?>
                     </ul>
                 </div>
             </div>

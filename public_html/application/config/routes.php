@@ -2,6 +2,29 @@
 
 
 return [
+    'login' => [
+        'controller' => 'main',
+        'action' => 'login'
+    ],
+    'registration' => [
+        'controller' => 'main',
+        'action' => 'registration'
+    ],
+    'authorize' => [
+        'controller' => 'main',
+        'action' => 'authorize'
+    ],
+    'create-user' => [
+        'controller' => 'main',
+        'action' => 'createUser'
+    ],
+    'logout' => [
+        'controller' => 'main',
+        'action' => 'logout'
+    ],
+
+
+
     '' => [
       'controller' => 'main',
       'action' => 'index'
@@ -30,6 +53,10 @@ return [
     'cart/add/{id:\d+}' => [
       'controller' => 'cart',
       'action' => 'add'
+    ],
+    'cart/{id:\d+}/delete' => [
+        'controller' => 'cart',
+        'action' => 'delete'
     ],
     'cart/promo' => [
         'controller' => 'cart',

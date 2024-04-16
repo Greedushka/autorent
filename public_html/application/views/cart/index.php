@@ -19,7 +19,7 @@
             <div class="card-deck" style="margin-left: 15px !important; margin-right: 15px !important; width: 800px">
                 <?php foreach ($cart as $val) { ?>
                         <div style="position: relative">
-                            <a href="/cart/<?= $val['id'] ?>/delete" style="
+                            <a href="/cart/<?= $val['car']['id'] ?>/delete" style="
                             padding: 5px 10px;
                             font-size: 12px;
                             background: red;
@@ -30,17 +30,17 @@
                             z-index: 100;
                             right: 25px;
                             top: 5px;">X</a>
-                        <a href="/car/<?=$val['id']?>" style="width: 800px">
+                        <a href="/car/<?=$val['car']['id']?>" style="width: 800px">
                             <div class="card mb-3" style="width: 800px">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="/public/imgs/<?= $val['car_img'] ?>" alt="" width="250" height="185">
+                                        <img src="/public/imgs/<?= $val['car']['img'] ?>" alt="" width="250" height="185">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                            <h5 class="card-title"><?= $val['car']['model'] . ' ' . $val['car']['brand'] ?></h5>
+<!--                                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+                                            <p class="card-text"><small class="text-muted"><?=$val['car']['price'];?> Руб.</small></p>
                                         </div>
                                     </div>
                                 </div>
@@ -72,12 +72,8 @@
                 </div>
             </div>
             <form action="" method="post" class="d-flex flex-wrap" style="gap: 10px; justify-content: center; align-items: center; margin-top: 5%; flex-direction: column" id="submitOrder">
-                <input type="text" placeholder="Ваше имя" name="name" class="form-control" aria-label="default input example">
-                <input type="text" placeholder="Ваша фамилия" name="surname" class="form-control" aria-label="default input example">
-                <input type="text" placeholder="Номер телефона" name="phone" class="form-control" aria-label="default input example">
-                <input type="text" placeholder="Почта" name="email" class="form-control" aria-label="default input example">
                 <div class="price-block">
-                    <div class="personalSale">10<span>%</span></div>
+<!--                    <div class="personalSale">10<span>%</span></div>-->
 
                     <div style="display: flex;" id="promoBlock">
                         <input type="text" name="promo" placeholder="Промокод" id="promo" class="form-control" aria-label="default input example">
@@ -86,7 +82,7 @@
                     <div id="promoText">
                     </div>
 
-                    <h1 style="display: flex; justify-content: center; margin-top: 5%;"> <span class="badge badge-dark" style="display: flex; align-items: center; justify-content: center"><div class="price"><?php echo  array_sum(array_map(function($item) { return $item['price']; }, $cart ));?></div><sub>₽</sub></span> </h1>
+                    <h1 style="display: flex; justify-content: center; margin-top: 5%;"> <span class="badge badge-dark" style="display: flex; align-items: center; justify-content: center"><div class="price"><?=  array_sum(array_map(function($item) { return $item['car']['price']; }, $cart ));?></div><sub>₽</sub></span> </h1>
                 </div>
                 <button class="btn btn-success" type="submit">Оформить заказ</button>
             </form>
@@ -95,8 +91,8 @@
                 var input = document.querySelector('.count-days');
                 var total_price = document.querySelector('.price');
                 var final_price = total_price.innerHTML;
-
-                var personalSale = document.querySelector('.personalSale');
+                //
+                // var personalSale = document.querySelector('.personalSale');
                 var counter = document.getElementById('counter').value;
                 var submitOrder = document.getElementById('submitOrder');
 
@@ -120,17 +116,12 @@
 
                 submitOrder.onsubmit = (e) => {
                     e.preventDefault();
-                    const car = document.querySelector('.car-subtitle').textContent;
-                    const car_img = document.querySelector('.card-img').src;
-                    const user_id = 1;
+
+
                     const price = document.querySelector('.price').textContent;
-                    const product_id = 1;
                     const formData = new FormData();
-                    formData.append('car', car);
-                    formData.append('car_img', car_img);
-                    formData.append('user_id', user_id);
+
                     formData.append('price', price);
-                    formData.append('product_id', product_id)
 
                     const xhr = new XMLHttpRequest();
                     xhr.open('POST', '/orders/add', true)
@@ -140,7 +131,7 @@
                             alert(xhr.responseText);
                         }
                     }
-                    xhr.responseType = 'json';
+                    //xhr.responseType = 'json';
 
                     xhr.send(formData);
                 }
