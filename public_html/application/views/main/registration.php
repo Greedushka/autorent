@@ -11,17 +11,35 @@
     </div>
 </header>
 <div class="container">
-    <div class="row">
+    <form action="/registration" method="POST">
+        <div data-mdb-input-init class="form-outline mb-4">
+            <input type="login" name="login" id="form2Example1" class="form-control"  />
+            <label class="form-label" for="form2Example1">Логин</label>
+        </div>
 
-        <form action="/create-user" method="POST">
-            <input type="text" name="login">
-            <input type="password" name="password">
-            <input type="password" name="re-password">
+        <!-- Password input -->
+        <div data-mdb-input-init class="form-outline mb-4">
+            <input type="password" name="password" id="form2Example2" class="form-control" />
+            <label class="form-label" for="form2Example2">Пароль</label>
+        </div>
 
-            <button type="submit">Зарегистрироваться</button>
-        </form>
+        <div data-mdb-input-init class="form-outline mb-4">
+            <input type="password" name="re-password" id="form2Example2" class="form-control" />
+            <label class="form-label" for="form2Example2">Повторите пароль</label>
+        </div>
 
-    </div>
+        <!-- Submit button -->
+        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Зарегистрироваться</button>
+
+        <!-- Register buttons -->
+        <div class="text-center">
+            <p>Есть аккаунт? <a href="/login">Войти</a></p>
+
+
+        </div>
+    </form>
 </div>
+
+
 
 

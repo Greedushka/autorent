@@ -6,6 +6,10 @@ return [
         'controller' => 'main',
         'action' => 'login'
     ],
+    'profile' => [
+        'controller' => 'main',
+        'action' => 'profile'
+    ],
     'registration' => [
         'controller' => 'main',
         'action' => 'registration'

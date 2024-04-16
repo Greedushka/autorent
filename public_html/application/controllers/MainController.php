@@ -96,4 +96,11 @@ class MainController extends Controller {
        echo json_encode($this->model->filterData());
     }
 
+    public function profileAction() {
+        $db = new Db();
+        $vars = [
+          'data' => $db->query('SELECT price, date FROM orders')
+        ];
+        $this->view->render('Профиль', $vars);
+    }
 }

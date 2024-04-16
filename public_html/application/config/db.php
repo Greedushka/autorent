@@ -2,7 +2,7 @@
 
 
 return [
-    'host' => 'localhost:3307',
+    'host' => 'localhost',
     'dbname' => 'rent_car',
     'password' =>'root',
     'user' => 'root',
