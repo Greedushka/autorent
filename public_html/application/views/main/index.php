@@ -14,7 +14,7 @@ $min_price = $db->column('SELECT MIN(price) FROM car')
         </div>
     </div>
 </header>
-<div class="filters" style="max-width: 500px; padding: 0 15px">
+<form class="filters" style="max-width: 500px; padding: 0 15px" action="filter" method="post">
     <div class="accordion accordion-flush" id="accordionFlushExample">
         <hr>
         <h2 class="accordion-header" id="flush-headingThree">
@@ -44,6 +44,7 @@ $min_price = $db->column('SELECT MIN(price) FROM car')
                                 <div><?= $max_price ?> Руб.</div>
                             </div>
                         </div>
+                        <button type="submit" class="btn btn-primary">Применить фильтры</button>
                     </div>
                     <style>
                         #slider-div {
@@ -90,7 +91,7 @@ $min_price = $db->column('SELECT MIN(price) FROM car')
         </div>
     </div>
     <hr>
-</div>
+</form>
         <div class="card-deck" style="margin-left: 15px !important; margin-right: 15px !important;">
             <?php foreach ($cars as $val) { ?>
                 <div class="col-3" style="margin-top: 20px">

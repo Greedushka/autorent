@@ -18,7 +18,7 @@
             <p class="car-price">Категория: <?= $data['auto_type'] ? htmlspecialchars($data['auto_type']) : 'машина' ?></p>
             <p class="car-price">Цвет: <?= $data['color'] ? htmlspecialchars($data['color']) : 'чёрный' ?></p>
             <div class="btn submit">
-                <button type="button" class="btn btn-primary placeAnOrder" onclick="addToCart(<?= $data['id'] ?>)">Добавить в корзину</button>
+                <button type="button" class="btn btn-primary placeAnOrder" <?= isset($_SESSION['user']) ? '' : 'hidden' ?> onclick="addToCart(<?= $data['id'] ?>)">Добавить в корзину</button>
             </div>
         </div>
     </div>

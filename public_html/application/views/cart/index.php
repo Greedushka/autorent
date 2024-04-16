@@ -18,6 +18,18 @@
             <?php else: ?>
             <div class="card-deck" style="margin-left: 15px !important; margin-right: 15px !important; width: 800px">
                 <?php foreach ($cart as $val) { ?>
+                        <div style="position: relative">
+                            <a href="/cart/<?= $val['id'] ?>/delete" style="
+                            padding: 5px 10px;
+                            font-size: 12px;
+                            background: red;
+                            border-radius: 30px;
+                            border: 1px solid black;
+                            color: white;
+                            position: absolute;
+                            z-index: 100;
+                            right: 25px;
+                            top: 5px;">X</a>
                         <a href="/car/<?=$val['id']?>" style="width: 800px">
                             <div class="card mb-3" style="width: 800px">
                                 <div class="row g-0">
@@ -34,7 +46,7 @@
                                 </div>
                             </div>
                         </a>
-
+                        </div>
 
                 <?php } ?>
             </div>
@@ -59,22 +71,23 @@
                     </span>
                 </div>
             </div>
-            <form action="" method="post" class="d-flex flex-wrap" style="gap: 10px; justify-content: center; align-items: center; margin-top: 5%" id="submitOrder">
+            <form action="" method="post" class="d-flex flex-wrap" style="gap: 10px; justify-content: center; align-items: center; margin-top: 5%; flex-direction: column" id="submitOrder">
                 <input type="text" placeholder="Ваше имя" name="name" class="form-control" aria-label="default input example">
                 <input type="text" placeholder="Ваша фамилия" name="surname" class="form-control" aria-label="default input example">
                 <input type="text" placeholder="Номер телефона" name="phone" class="form-control" aria-label="default input example">
                 <input type="text" placeholder="Почта" name="email" class="form-control" aria-label="default input example">
+                <div class="price-block">
+                    <div class="personalSale">10<span>%</span></div>
 
-                <div style="display: flex;"><div class="personalSale">10</div>%</div>
+                    <div style="display: flex;" id="promoBlock">
+                        <input type="text" name="promo" placeholder="Промокод" id="promo" class="form-control" aria-label="default input example">
+                        <a class="btn btn-primary" onclick="promo();">Применить промокод</a>
+                    </div>
+                    <div id="promoText">
+                    </div>
 
-                <div style="display: flex;" id="promoBlock">
-                    <input type="text" name="promo" placeholder="Промокод" id="promo" class="form-control" aria-label="default input example">
-                    <a class="btn btn-primary" onclick="promo();">Применить промокод</a>
+                    <h1 style="display: flex; justify-content: center; margin-top: 5%;"> <span class="badge badge-dark" style="display: flex; align-items: center; justify-content: center"><div class="price"><?php echo  array_sum(array_map(function($item) { return $item['price']; }, $cart ));?></div><sub>₽</sub></span> </h1>
                 </div>
-                <div id="promoText">
-                </div>
-
-                <h1 style="display: flex; justify-content: center; margin-top: 5%;"> <span class="badge badge-dark" style="display: flex; align-items: center; justify-content: center"><div class="price"><?php echo  array_sum(array_map(function($item) { return $item['price']; }, $cart ));?></div><sub>₽</sub></span> </h1>
                 <button class="btn btn-success" type="submit">Оформить заказ</button>
             </form>
 
