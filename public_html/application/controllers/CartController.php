@@ -8,16 +8,24 @@ use application\lib\Db;
 class CartController extends Controller
 {
     public function indexAction() {
-        $db = new Db();
-        $cart = $db->row("SELECT * FROM cart WHERE user_id = {$_SESSION['user']}");
+        if (isset($_SESSION['user'])) {
+            $db = new Db();
+            $cart = $db->row("SELECT * FROM cart WHERE user_id = {$_SESSION['user']}");
 
-        foreach ($cart as $key => $item) {
-            $cart[$key]['car'] = $db->row("SELECT * FROM car WHERE id = {$item['car_id']}")[0];
+            foreach ($cart as $key => $item) {
+                $cart[$key]['car'] = $db->row("SELECT * FROM car WHERE id = {$item['car_id']}")[0];
+            }
+
+            $vars = [
+                'cart' => $cart
+            ];
+        } else {
+            $vars = [
+                'cart' => []
+            ];
         }
 
-        $vars = [
-            'cart' => $cart
-        ];
+
 
         $this->view->render('index', $vars);
     }
