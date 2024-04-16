@@ -9,9 +9,16 @@ class CartController extends Controller
 {
     public function indexAction() {
         $db = new Db();
+        $cart = $db->row("SELECT * FROM cart WHERE user_id = {$_SESSION['user']}");
+
+        foreach ($cart as $key => $item) {
+            $cart[$key]['car'] = $db->row("SELECT * FROM car WHERE id = {$item['car_id']}")[0];
+        }
+
         $vars = [
-            'cart' => $db->row('SELECT * FROM cart')
+            'cart' => $cart
         ];
+
         $this->view->render('index', $vars);
     }
 
@@ -31,5 +38,13 @@ class CartController extends Controller
         }
 
         echo (int)$promo[0]['sale'];
+    }
+
+    public function deleteAction()
+    {
+        $db = new Db();
+        $db->query("DELETE FROM cart WHERE id = {$this->route['id']}");
+
+        $this->view->redirect('cart');
     }
 }

@@ -100,7 +100,7 @@ $min_price = $db->column('SELECT MIN(price) FROM car')
                         <img src="/public/imgs/<?= $val['img']?>" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title"><?= $val['brand'].' '.$val['model'] ?></h5>
-                            <p class="card-text">some text about car</p>
+                            <p class="card-text"><?=$val['price']?> Руб./Сутки</p>
                         </div>
                     </div>
                     </a>

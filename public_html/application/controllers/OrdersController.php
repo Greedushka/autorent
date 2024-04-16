@@ -12,5 +12,6 @@ class OrdersController extends Controller
 
     public function addAction() {
         $this->model->addorder();
+        echo 'Заказ успешно создан!';
     }
 }
