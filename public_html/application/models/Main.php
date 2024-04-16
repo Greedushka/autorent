@@ -39,7 +39,7 @@ class Main extends Model{
             $sql .= " AND mileage < {$data['mileage']}";
         }
         if(!empty($data['car_type'])){
-            $sql .= " AND auto_type = '{$data['car_type']}'";
+            $sql .= " AND fuel_type = '{$data['car_type']}'";
         }
 
         return $db->row($sql);

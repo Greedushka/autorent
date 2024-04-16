@@ -84,35 +84,26 @@ $min_price = $db->column('SELECT MIN(price) FROM car')
                         filters.onsubmit = (e) => {
                             e.preventDefault();
 
-                           let json = {
-                                car: document.getElementById('auto-name'),
-                                price_max: document.getElementById('ex2').dataset.sliderMax,
-                                price_min: document.getElementById('ex2').dataset.slideMin,
-                                mileage: document.getElementById('mileage').value,
-                                car_type: car_type.value,
-                            }
+
                             const formData = new FormData();
                            formData.append('car', document.getElementById('auto-name').value)
-                           formData.append('price_max', document.getElementById('ex2').dataset.sliderMax)
-                           formData.append('price_min', document.getElementById('ex2').dataset.sliderMin)
+                           formData.append('price_max', document.getElementById('slider-max-label').textContent)
+                           formData.append('price_min', document.getElementById('slider-min-label').textContent)
                            formData.append('mileage', document.getElementById('mileage').value)
                            formData.append('car_type', car_type.value)
                             const xhr = new XMLHttpRequest();
                             xhr.open('POST', 'filter', true)
 
                             xhr.onload = () => {
-                                console.log(xhr.response)
                                 let JSONobj = JSON.parse(xhr.response)
-
-                                console.log(JSONobj)
-
+                                document.querySelector('.card-deck').innerHTML = '';
                                 JSONobj.forEach(e => {
-                                    document.querySelector('.card-deck').innerHTML =
+                                    document.querySelector('.card-deck').innerHTML +=
                                         `<div class="col-3" style="margin-top: 20px"><a href="/car/${e.id}"><div class="card h-100"><img src="/public/imgs/${e.img}" class="card-img-top"><div class="card-body"><h5 class="card-title">${e.brand}</h5><p class="card-text">${e.price}</p></div></div></a></div>`
                                 })
 
                             }
-                            xhr.responseType = 'json';
+                            //xhr.responseType = 'json';
 
                             xhr.send(formData);
                         }
