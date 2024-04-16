@@ -19,7 +19,7 @@
             <div class="card-deck" style="margin-left: 15px !important; margin-right: 15px !important; width: 800px">
                 <?php foreach ($cart as $val) { ?>
                         <div style="position: relative">
-                            <a href="/cart/<?= $val['car']['id'] ?>/delete" style="
+                            <a href="/cart/<?= $val['id'] ?>/delete" style="
                             padding: 5px 10px;
                             font-size: 12px;
                             background: red;

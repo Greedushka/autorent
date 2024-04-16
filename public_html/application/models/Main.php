@@ -31,20 +31,15 @@ class Main extends Model{
         $data = $_POST;
         $db = new Db();
         $sql = "SELECT * FROM car WHERE price BETWEEN {$data['price_min']} AND {$data['price_max']}";
-        $carNameFilter = '';
-        $carMileage = '';
-        $carType = '';
-        if(isset($carNameFilter)){
-            $carNameFilter .= $data['car'];
-            $sql .= " AND brand LIKE '%$carNameFilter%'";
+
+        if(!empty($data['car'])){
+            $sql .= " AND brand LIKE '%{$data['car']}%'";
         }
-        if(isset($carMileage)){
-            $carMileage .= $data['mileage'];
-            $sql .= " AND mileage < $carMileage";
+        if(!empty($data['mileage'])){
+            $sql .= " AND mileage < {$data['mileage']}";
         }
-        if(isset($carType)){
-            $carType .= $data['car_type'];
-            $sql .= " AND auto_type = '$carType'";
+        if(!empty($data['car_type'])){
+            $sql .= " AND auto_type = '{$data['car_type']}'";
         }
 
         return $db->row($sql);

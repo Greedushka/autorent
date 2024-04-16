@@ -47,15 +47,15 @@ $min_price = $db->column('SELECT MIN(price) FROM car')
                     </div>
                     <hr>
                     <div class="mileage row flex-column">
-                        <label for="mileage">Пробег</label>
+                        <label for="mileage">Пробег до</label>
                         <input type="text" id="mileage">
                     </div>
                     <div class="car-type row flex-column">
                         <label for="car-type">Тип авто</label>
                         <select id="car-type">
-                            <option selected value="бензин">Бензин</option>
-                            <option value="дизель">Дизель</option>
-                            <option value="электрокар">Электрокар</option>
+                            <option selected value="Бензин">Бензин</option>
+                            <option value="Дизель">Дизель</option>
+                            <option value="Электрокар">Электрокар</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Применить фильтры</button>
@@ -103,6 +103,9 @@ $min_price = $db->column('SELECT MIN(price) FROM car')
                             xhr.onload = () => {
                                 console.log(xhr.response)
                                 let JSONobj = JSON.parse(xhr.response)
+
+                                console.log(JSONobj)
+
                                 JSONobj.forEach(e => {
                                     document.querySelector('.card-deck').innerHTML =
                                         `<div class="col-3" style="margin-top: 20px"><a href="/car/${e.id}"><div class="card h-100"><img src="/public/imgs/${e.img}" class="card-img-top"><div class="card-body"><h5 class="card-title">${e.brand}</h5><p class="card-text">${e.price}</p></div></div></a></div>`

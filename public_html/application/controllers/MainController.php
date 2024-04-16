@@ -93,7 +93,7 @@ class MainController extends Controller {
     }
 
     public function filterAction() {
-       return $this->model->filterData();
+       echo json_encode($this->model->filterData());
     }
 
 }
