@@ -31,12 +31,16 @@ class MainController extends Controller {
         $this->view->render('Контакты');
     }
 
-    public function carAction(){
+    public function carAction() {
         $adminModel = new Admin();
         $vars = [
             'data' => $adminModel->postData($this->route['id'])[0],
         ];
         $this->view->render('Машина', $vars);
+    }
+
+    public function filterAction() {
+       return $this->model->filterData();
     }
 
 }

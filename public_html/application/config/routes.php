@@ -6,6 +6,10 @@ return [
       'controller' => 'main',
       'action' => 'index'
     ],
+    'filter' => [
+        'controller' => 'main',
+        'action' => 'filter'
+    ],
   'about' => [
       'controller' => 'main',
       'action' => 'about'

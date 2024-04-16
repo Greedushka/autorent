@@ -3,6 +3,7 @@
 namespace application\models;
 
 use application\core\Model;
+use application\lib\Db;
 
 class Main extends Model{
 
@@ -26,4 +27,26 @@ class Main extends Model{
         return true;
     }
 
+    public function filterData(): array {
+        $data = $_POST;
+        $db = new Db();
+        $sql = "SELECT * FROM car WHERE price BETWEEN {$data['price_min']} AND {$data['price_max']}";
+        $carNameFilter = '';
+        $carMileage = '';
+        $carType = '';
+        if(isset($carNameFilter)){
+            $carNameFilter .= $data['car'];
+            $sql .= " AND brand LIKE '%$carNameFilter%'";
+        }
+        if(isset($carMileage)){
+            $carMileage .= $data['mileage'];
+            $sql .= " AND mileage < $carMileage";
+        }
+        if(isset($carType)){
+            $carType .= $data['car_type'];
+            $sql .= " AND auto_type = '$carType'";
+        }
+
+        return $db->row($sql);
+    }
 }
