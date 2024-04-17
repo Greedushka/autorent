@@ -77,14 +77,14 @@
 
                     <div style="display: flex;" id="promoBlock">
                         <input type="text" name="promo" placeholder="Промокод" id="promo" class="form-control" aria-label="default input example">
-                        <a class="btn btn-primary" onclick="promo();">Применить промокод</a>
+                        <a class="btn btn-outline-dark" onclick="promo();" style="color: ">Применить промокод</a>
                     </div>
                     <div id="promoText">
                     </div>
 
                     <h1 style="display: flex; justify-content: center; margin-top: 5%;"> <span class="badge badge-dark" style="display: flex; align-items: center; justify-content: center"><div class="price"><?=  array_sum(array_map(function($item) { return $item['car']['price']; }, $cart ));?></div><sub>₽</sub></span> </h1>
                 </div>
-                <button class="btn btn-success" type="submit">Оформить заказ</button>
+                <button class="btn btn-outline-dark" type="submit">Оформить заказ</button>
             </form>
 
             <script>
@@ -106,9 +106,9 @@
                     //xhrPromo.responseType = 'json';
                     xhrPromo.onload = function() {
                         if (xhrPromo.responseText != 0) {
-                            total_price.innerHTML = final_price * document.getElementById('counter').value * (1 - xhrPromo.responseText / 100);
+                            total_price.innerHTML = Math.ceil(final_price * document.getElementById('counter').value * (1 - xhrPromo.responseText / 100));
                             document.getElementById('promoBlock').style.display = 'none';
-                            document.getElementById('promoText').textContent = 'Скидка в размере ' + xhrPromo.responseText + '% по промокоду';
+                            document.getElementById('promoText').textContent = 'Скидка в размере ' + Math.ceilxhrPromo.responseText + '% по промокоду';
                         }
                     }
                     xhrPromo.send(formDataPromo);

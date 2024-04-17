@@ -19,27 +19,6 @@ class Admin extends Model{
             return true;
     }
 
-//    public function postValidate($post, $type)
-//    {
-//        $nameLen = strlen($post['name']);
-//        $descLen = iconv_strlen($post['description']);
-//        $textLen = iconv_strlen($post['text']);
-//        if ($nameLen < 3 or $nameLen > 100) {
-//            $this->error = 'Название должно содержать от 3 до 100 символов';
-//            return false;
-//        } elseif ($descLen < 3 or $descLen > 100) {
-//            $this->error = 'Описание должно содержать от 3 до 100 символов';
-//            return false;
-//        } elseif ($textLen < 10 or $textLen > 5000) {
-//            $this->error = 'Текст должен содержать от 10 до 5000 символов';
-//            return false;
-//        }
-//        if (empty($_FILES['img']['tmp_name']) and $type == 'add') {
-//            $this->error = 'Изображение не найдено';
-//            return false;
-//        }
-//        return true;
-//    }
     public function postAdd($post) {
         $params = [
             'brand' => $post['brand'],
@@ -59,12 +38,36 @@ class Admin extends Model{
         $this->db->query('INSERT INTO car VALUES (DEFAULT, :brand, :model, :production_date, :mileage, :overclocking, :gas_tank, :kpp, :horse_power, :fuel_type, :price, :img, :auto_type, :color)', $params);
         return $this->db->lastInsertId();
     }
-//    public function postUploadImage($path, $id) {
-//        $img = new Imagick($path);
-//        $img->cropThumbnailImage(1080, 600);
-//        $img->setImageCompressionQuality(80);
-//        $img->writeImage($id.'.jpg');
-//    }
+
+    public function addpost(array $data): void
+    {
+        $this->db->query("INSERT INTO post VALUES (default, '{$data['title']}', '{$data['desc']}', '{$data['img']}')");
+    }
+
+    public function getPosts()
+    {
+        return $this->db->query('SELECT * FROM post');
+    }
+
+    public function getPost($id)
+    {
+        return $this->db->query("SELECT * FROM post WHERE id = {$id}");
+    }
+
+    public function editPost(int $id, array $data): void
+    {
+        $sql = "UPDATE `post` SET `title` = '{$data['title']}', 
+                 `description` = '{$data['description']}', 
+                 `img` = '{$data['img']}'
+             WHERE `post`.`id` = {$id}";
+
+        $this->db->query($sql);
+    }
+
+    public function delPost($id)
+    {
+        return $this->db->query("DELETE FROM post WHERE id = $id");
+    }
 
     public function isPostExists($id) {
         $params = [
@@ -73,20 +76,22 @@ class Admin extends Model{
 
         return $this->db->column('SELECT id FROM posts WHERE id = :id', $params);
     }
-    public function postDelete($id) {
-        $params = [
-            'id' => $id,
-        ];
-        $this->db->query('DELETE FROM posts WHERE id = :id', $params);
-        //удаление картинки
-        //unlink('public/materials/'.$id.'.jpg');
-    }
+
+
+
 
     public function postData(int $id) {
         $params = [
             'id' => $id,
         ];
         return $this->db->row('SELECT * FROM car WHERE id = :id', $params);
+    }
+
+    public function carData(int $id) {
+        $params = [
+            'id' => $id,
+        ];
+        return $this->db->row('SELECT * FROM post WHERE id = :id', $params);
     }
 
     public function getCars(): array

@@ -15,7 +15,7 @@
         <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
         <script src="/public/scripts/app.js"></script>
         <script src="/public/scripts/main.js"></script>
-<!--        <script src="//code.jivo.ru/widget/frC2fRe91N" async></script>-->
+        <script src="//code.jivo.ru/widget/frC2fRe91N" async></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.css" integrity="sha512-SZgE3m1he0aEF3tIxxnz/3mXu/u/wlMNxQSnE0Cni9j/O8Gs+TjM9tm1NX34nRQ7GiLwUEzwuE3Wv2FLz2667w==" crossorigin="anonymous" />
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
@@ -40,9 +40,6 @@
 
                         <li class="nav-item">
                             <a class="nav-link" href="/about">Блог</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/contact">Обратная связь</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/cart">Корзина</a>

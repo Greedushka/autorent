@@ -11,7 +11,7 @@
     </div>
 </header>
 <div class="container">
-    <form action="/registration" method="POST">
+    <form action="/create-user" method="POST">
         <div data-mdb-input-init class="form-outline mb-4">
             <input type="login" name="login" id="form2Example1" class="form-control"  />
             <label class="form-label" for="form2Example1">Логин</label>

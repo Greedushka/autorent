@@ -44,6 +44,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="/admin/addpost">
+                                <i class="fa fa-fw fa-plus"></i>
+                                <span class="nav-link-text">Добавить пост</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/posts">
+                                <i class="fa fa-fw fa-list"></i>
+                                <span class="nav-link-text">Посты</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="/admin/logout">
                             <i class="fa fa-fw fa-sign-out"></i>
                             <span class="nav-link-text">Выход</span>

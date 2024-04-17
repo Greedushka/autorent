@@ -60,6 +60,19 @@ class MainController extends Controller {
         $this->view->redirect('login');
     }
 
+    public function createreviewAction()
+    {
+        $this->model->createreview();
+    }
+
+    public function postAction()
+    {
+        $admin = new Admin();
+        $vars = [
+            'data' => $admin->carData($this->route['id'])[0]
+        ];
+        $this->view->render('Пост', $vars);
+    }
 
     public function indexAction() {
         $db = new Db();
@@ -70,7 +83,11 @@ class MainController extends Controller {
     }
 
     public function aboutAction() {
-        $this->view->render('Обо мне');
+        $db = new Db();
+        $vars = [
+          'posts' => $db->row('SELECT * FROM post')
+        ];
+        $this->view->render('Обо мне', $vars);
     }
 
     public function contactAction() {
@@ -99,7 +116,7 @@ class MainController extends Controller {
     public function profileAction() {
         $db = new Db();
         $vars = [
-          'data' => $db->query('SELECT price, date FROM orders')
+          'data' => $db->query("SELECT price, date FROM orders WHERE user_id = {$_SESSION['user']}")
         ];
         $this->view->render('Профиль', $vars);
     }

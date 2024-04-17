@@ -122,7 +122,7 @@ return [
         'action' => 'carDelete'
     ],
 
-    'admin/promo' =>[
+    'admin/promo' => [
         'controller' => 'admin',
         'action' => 'promo'
     ],
@@ -134,5 +134,32 @@ return [
         'controller' => 'admin',
         'action' => 'promoDelete'
     ],
-
+    'admin/addpost' => [
+        'controller' => 'admin',
+        'action' => 'addpost',
+    ],
+    'admin/posts' => [
+        'controller' => 'admin',
+        'action' => 'posts',
+    ],
+    'admin/post/{id:\d+}' => [
+        'controller' => 'admin',
+        'action' => 'post',
+    ],
+    'admin/post/{id:\d+}/delete' => [
+        'controller' => 'admin',
+        'action' => 'postDelete',
+    ],
+    'admin/post/{id:\d+}/save' => [
+        'controller' => 'admin',
+        'action' => 'postSave'
+    ],
+    'car/createreview' => [
+        'controller' => 'main',
+        'action' => 'createreview'
+    ],
+    'post/{id:\d+}' => [
+        'controller' => 'main',
+        'action' => 'post'
+    ],
 ];

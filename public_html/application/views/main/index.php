@@ -55,10 +55,10 @@ $min_price = $db->column('SELECT MIN(price) FROM car')
                         <select id="car-type">
                             <option selected value="Бензин">Бензин</option>
                             <option value="Дизель">Дизель</option>
-                            <option value="Электрокар">Электрокар</option>
+                            <option value="Электричество">Электрокар</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Применить фильтры</button>
+                    <button type="submit" class="btn btn-dark">Применить фильтры</button>
                     <style>
                         #slider-div {
                             display: flex;
@@ -99,7 +99,7 @@ $min_price = $db->column('SELECT MIN(price) FROM car')
                                 document.querySelector('.card-deck').innerHTML = '';
                                 JSONobj.forEach(e => {
                                     document.querySelector('.card-deck').innerHTML +=
-                                        `<div class="col-3" style="margin-top: 20px"><a href="/car/${e.id}"><div class="card h-100"><img src="/public/imgs/${e.img}" class="card-img-top"><div class="card-body"><h5 class="card-title">${e.brand}</h5><p class="card-text">${e.price}</p></div></div></a></div>`
+                                        `<div class="col-3" style="margin-top: 20px"><a href="/car/${e.id}"><div class="card h-100"><img height="225" src="/public/imgs/${e.img}" class="card-img-top"><div class="card-body"><h5 class="card-title">${e.brand}</h5><p class="card-text">${e.price}</p></div></div></a></div>`
                                 })
 
                             }
@@ -139,7 +139,7 @@ $min_price = $db->column('SELECT MIN(price) FROM car')
                 <div class="col-3" style="margin-top: 20px">
                     <a href="/car/<?=$val['id']?>">
                     <div class="card h-100">
-                        <img src="/public/imgs/<?= $val['img']?>" class="card-img-top">
+                        <img src="/public/imgs/<?= $val['img']?>" class="card-img-top" height="225">
                         <div class="card-body">
                             <h5 class="card-title"><?= $val['brand'].' '.$val['model'] ?></h5>
                             <p class="card-text"><?=$val['price']?> Руб./Сутки</p>

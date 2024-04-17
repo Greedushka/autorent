@@ -3,6 +3,7 @@
 namespace application\controllers;
 
 use application\core\Controller;
+use application\models\Admin;
 
 
 class AdminController extends Controller {
@@ -122,5 +123,61 @@ class AdminController extends Controller {
     {
         $this->model->delPromo($this->route['id']);
         $this->view->redirect('admin/promo');
+    }
+
+    public function addpostAction()
+    {
+        if (!empty($_POST)) {
+            if (!empty($_FILES['img'])) {
+                $fileName = rand() . '.' . pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
+                move_uploaded_file($_FILES['img']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/public/imgs/' . $fileName);
+                $_POST['img'] = $fileName;
+            } else {
+                $_POST['img'] = NULL;
+            }
+            $this->model->addpost($_POST);
+            $this->view->redirect('admin/posts');
+        }
+        $this->view->render('Добавить пост');
+    }
+
+    public function postsAction()
+    {
+        $posts = $this->model->getPosts();
+        $this->view->render('Посты', ['posts' => $posts]);
+    }
+
+    public function postAction() {
+        $adminModel = new Admin();
+        $vars = [
+            'data' => $adminModel->carData($this->route['id'])[0],
+        ];
+        $this->view->render('Пост', $vars);
+    }
+    public function postDeleteAction(): void
+    {
+        $post = $this->model->getPost($this->route['id']);
+//        unlink($_SERVER['DOCUMENT_ROOT'] . '/public/imgs/' . $post[0]['img']);
+
+        $this->model->delPost($this->route['id']);
+        $this->view->redirect('admin/posts');
+    }
+
+    public function postSaveAction(): void
+    {
+        if (!empty($_FILES['img'])) {
+            $fileName = rand() . '.' . pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
+            move_uploaded_file($_FILES['img']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/public/imgs/' . $fileName);
+            $_POST['img'] = $fileName;
+
+            $post = $this->model->getPost($this->route['id']);
+//            unlink($_SERVER['DOCUMENT_ROOT'] . '/public/imgs/' . $post[0]['img']);
+        } else {
+            $post = $this->model->getPost($this->route['id']);
+            $_POST['img'] = $post[0]['img'];
+        }
+
+        $this->model->editPost($this->route['id'], $_POST);
+        $this->view->redirect("admin/post/{$this->route['id']}");
     }
 }

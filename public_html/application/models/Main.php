@@ -44,4 +44,10 @@ class Main extends Model{
 
         return $db->row($sql);
     }
+
+    public function createreview() {
+        $data = $_POST;
+        $db = new Db();
+        $db->query("INSERT INTO reviews VALUES (default, '{$data['stars_count']}', '{$data['description']}', {$data['car_id']}, {$data['user_id']})");
+    }
 }
