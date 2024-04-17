@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="margin: 0 !important;">
     <div class="card card-login mx-auto mt-5">
         <div class="card-header">Вход в панель Администратора</div>
         <div class="card-body">

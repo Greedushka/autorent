@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div class="content-wrapper" style="margin: 0 !important;">
     <div class="container-fluid">
         <div class="card mb-3">
             <div class="card-header"><?php echo $title; ?></div>

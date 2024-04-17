@@ -2,6 +2,14 @@
 
 
 return [
+    'car/createreview' => [
+        'controller' => 'main',
+        'action' => 'createreview'
+    ],
+    'post/{id:\d+}' => [
+        'controller' => 'main',
+        'action' => 'post'
+    ],
     'login' => [
         'controller' => 'main',
         'action' => 'login'
@@ -154,12 +162,24 @@ return [
         'controller' => 'admin',
         'action' => 'postSave'
     ],
-    'car/createreview' => [
-        'controller' => 'main',
-        'action' => 'createreview'
+    'admin/user' => [
+        'controller' => 'admin',
+        'action' => 'user'
     ],
-    'post/{id:\d+}' => [
-        'controller' => 'main',
-        'action' => 'post'
+    'admin/user/{id:\d+}/delete' => [
+        'controller' => 'admin',
+        'action' => 'userDelete'
+    ],
+    'admin/orders' => [
+        'controller' => 'admin',
+        'action' => 'orders'
+    ],
+    'admin/reviews' => [
+        'controller' => 'admin',
+        'action' => 'reviews'
+    ],
+    'admin/reviews/{id:\d+}/delete' => [
+        'controller' => 'admin',
+        'action' => 'reviewDelete'
     ],
 ];

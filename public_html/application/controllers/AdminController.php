@@ -180,4 +180,28 @@ class AdminController extends Controller {
         $this->model->editPost($this->route['id'], $_POST);
         $this->view->redirect("admin/post/{$this->route['id']}");
     }
+
+    public function reviewsAction() {
+        $reviews = $this->model->getReviews();
+        $this->view->render('Отзывы', ['reviews' => $reviews]);
+    }
+
+    public function reviewDeleteAction() {
+        $this->model->reviewDelete($this->route['id']);
+        $this->view->redirect('admin/reviews');
+    }
+
+    public function ordersAction() {
+        $orders = $this->model->getOrders();
+        $this->view->render('Заказы', ['orders' => $orders]);
+    }
+
+    public function userAction() {
+        $user = $this->model->getUser();
+        $this->view->render('Пользователи', ['user' => $user]);
+    }
+    public function userDeleteAction() {
+        $this->model->userDelete($this->route['id']);
+        $this->view->redirect('admin/user');
+}
 }

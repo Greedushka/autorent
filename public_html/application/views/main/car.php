@@ -35,10 +35,6 @@ $reviews = $db->row("SELECT * FROM reviews WHERE user_id = {$this->route['id']} 
             </div>
         </div>
     </div>
-    <?php if (!isset($_SESSION['user']))
-
-
-        ?>
 </div>
 <div class="row d-flex justify-content-center">
     <div class="col-md-8 col-lg-6">
@@ -53,19 +49,23 @@ $reviews = $db->row("SELECT * FROM reviews WHERE user_id = {$this->route['id']} 
                         <div class="rating--item rate-item" data-item-value="2">★</div>
                         <div class="rating--item rate-item" data-item-value="1">★</div>
                     </div>
-                    <textarea id="addANote" class="form-control">Ваш отзыв...</textarea>
+                    <label for="addANote" style="align-self: center">Напишите нам свой отзыв</label><textarea id="addANote" class="form-control"></textarea>
                     <button class="form-label btn btn-dark" type="submit" style="margin-top: 10px">Оставить отзыв</button>
                 </form>
                 <?php endif; ?>
                 <script>
                     let reviewForm = document.getElementById('createReview')
 
+                    document.getElementById('addANote').oninput = (ta) => {
+                        document.getElementById('addANote').textContent = ta.value;
+                    }
+
                     reviewForm.onsubmit = (e) => {
                         e.preventDefault()
 
                         const formData = new FormData();
                         formData.append('stars_count', document.getElementById('rating').dataset.totalValue)
-                        formData.append('description', document.getElementById('addANote').textContent)
+                        formData.append('description', document.getElementById('addANote').value)
                         formData.append('car_id', <?= $data['id'] ?>)
                         formData.append('user_id', <?= $this->route['id'] ?>)
                         const xhr = new XMLHttpRequest();

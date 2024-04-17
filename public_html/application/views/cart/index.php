@@ -20,16 +20,10 @@
                 <?php foreach ($cart as $val) { ?>
                         <div style="position: relative">
                             <a href="/cart/<?= $val['id'] ?>/delete" style="
-                            padding: 5px 10px;
-                            font-size: 12px;
-                            background: red;
-                            border-radius: 30px;
-                            border: 1px solid black;
-                            color: white;
                             position: absolute;
                             z-index: 100;
                             right: 25px;
-                            top: 5px;">X</a>
+                            top: 5px;"><i class="fa fa-window-close" aria-hidden="true"></i></a>
                         <a href="/car/<?=$val['car']['id']?>" style="width: 800px">
                             <div class="card mb-3" style="width: 800px">
                                 <div class="row g-0">

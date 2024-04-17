@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div class="content-wrapper" style="margin: 0 !important;">
     <div class="container-fluid">
         <br>
         <br>

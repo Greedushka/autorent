@@ -7,24 +7,23 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-4">
-                        <?php if (empty($vars['posts'])): ?>
-                            <p>Список постов пуст</p>
+                        <?php if (empty($vars['reviews'])): ?>
+                            <p>Список отзывов пуст</p>
                         <?php else: ?>
                             <table class="table">
                                 <tr>
                                     <th>ID</th>
-                                    <th>Титульник</th>
-                                    <th>Описание</th>
+                                    <th>Количество звёзд</th>
+                                    <th>Текст сообщения</th>
 
 
                                 </tr>
-                                <?php foreach ($vars['posts'] as $key => $post): ?>
+                                <?php foreach ($vars['reviews'] as $key => $review): ?>
                                     <tr>
                                         <td><?=++$key?></td>
-                                        <td><?=$post['title']?></td>
-                                        <td style="max-width: 250px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><?=$post['description']?></td>
-                                        <td><a href="/admin/post/<?= $post['id']; ?>" class="btn btn-primary">Редактировать</a></td>
-                                        <td><a href="/admin/post/<?= $post['id']; ?>/delete" class="btn btn-danger">Удалить</a></td>
+                                        <td><?=$review['stars_count']?></td>
+                                        <td><?=$review['description']?></td>
+                                        <td><a href="/admin/reviews/<?= $review['id']; ?>/delete" class="btn btn-danger">Удалить</a></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </table>

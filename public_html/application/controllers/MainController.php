@@ -45,7 +45,7 @@ class MainController extends Controller {
         }
 
         if ($_POST['password'] === $_POST['re-password']) {
-            $db->row("INSERT INTO user VALUE (DEFAULT, 'name', 'number', 'email', 0, 0, 'role', '{$_POST['login']}', '{$_POST['password']}')");
+            $db->row("INSERT INTO user VALUE (DEFAULT, 'name', '{$_POST['phone']}', 'email', 0, 0, 'role', '{$_POST['login']}', '{$_POST['password']}')");
             $_SESSION['user'] = $db->lastInsertId();;
 
             $this->view->redirect('');

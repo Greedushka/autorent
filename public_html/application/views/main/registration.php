@@ -13,18 +13,23 @@
 <div class="container">
     <form action="/create-user" method="POST">
         <div data-mdb-input-init class="form-outline mb-4">
-            <input type="login" name="login" id="form2Example1" class="form-control"  />
+            <input type="login" name="login" id="form2Example1" class="form-control text-center"  />
             <label class="form-label" for="form2Example1">Логин</label>
         </div>
 
         <!-- Password input -->
         <div data-mdb-input-init class="form-outline mb-4">
-            <input type="password" name="password" id="form2Example2" class="form-control" />
+            <input type="password" name="password" id="form2Example2" class="form-control text-center" />
             <label class="form-label" for="form2Example2">Пароль</label>
         </div>
 
         <div data-mdb-input-init class="form-outline mb-4">
-            <input type="password" name="re-password" id="form2Example2" class="form-control" />
+            <input type="password" name="re-password" id="form2Example2" class="form-control text-center" />
+            <label class="form-label" for="form2Example2">Повторите пароль</label>
+        </div>
+
+        <div data-mdb-input-init class="form-outline mb-4">
+            <input type="tel" id="modal-phone" class="modal-input form-control text-center" name="phone" placeholder="Номер телефона" data-mask="+7(999)999-99-99" required="">
             <label class="form-label" for="form2Example2">Повторите пароль</label>
         </div>
 

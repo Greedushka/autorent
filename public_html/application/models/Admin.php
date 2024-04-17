@@ -77,8 +77,25 @@ class Admin extends Model{
         return $this->db->column('SELECT id FROM posts WHERE id = :id', $params);
     }
 
+    public function getReviews() {
+        return $this->db->row('SELECT * FROM reviews');
+    }
 
+    public function reviewDelete($id) {
+        return $this->db->query("DELETE FROM reviews WHERE id = {$id}");
+    }
 
+    public function getUser() {
+        return $this->db->row('SELECT * FROM user');
+    }
+
+    public function userDelete($id) {
+        return $this->db->query("DELETE FROM user WHERE id = {$id}");
+    }
+
+    public function getOrders() {
+        return $this->db->row('SELECT * FROM orders');
+    }
 
     public function postData(int $id) {
         $params = [
