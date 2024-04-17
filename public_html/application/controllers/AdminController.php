@@ -17,7 +17,6 @@ class AdminController extends Controller {
 
     public function loginAction()
     {
-
         if (isset($_SESSION['admin'])) {
             $this->view->redirect('admin/add');
         }
@@ -26,6 +25,7 @@ class AdminController extends Controller {
             if(!$this->model->loginValidate($_POST)) {
                 $this->view->message('error', $this->model->error);
             }
+            $_SESSION['admin'] = true;
             $this->view->redirect('admin/add');
         }
 
